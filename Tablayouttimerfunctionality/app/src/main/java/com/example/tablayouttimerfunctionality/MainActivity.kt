@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import java.util.Timer
+import java.util.TimerTask
 
 
  class MainActivity : AppCompatActivity() {
@@ -35,21 +37,14 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
              Log.d("fact",it.toString())
          })
 
+         //Sir timer code needed in fragment // ok mam // after implement code i will msg you
 
-        val timer = object: CountDownTimer(20000,1000){
-            override fun onTick(millitime: Long) {
-                var time = millitime/1000
 
-//                Toast.makeText(this@MainActivity,""+time.toString(),Toast.LENGTH_SHORT).show()
-                mainViewModel.update_value(time.toString());
-
-            }
-
-            override fun onFinish() {
-
-            }
-        }
-        timer.start();
+//         Timer().schedule(object : TimerTask() {
+//             override fun run() {
+//                 TODO("Do something")
+//             }
+//         }, 2000)
 
         tabLayout=findViewById(R.id.tabLayout);
         frameLayout=findViewById(R.id.frameLayout);
@@ -83,7 +78,7 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-
+                //FadeTab(tab.position)
                // Toast.makeText(this@MainActivity,"unselected "+tab.position,Toast.LENGTH_LONG).show()
             }
 
@@ -91,4 +86,27 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
         })
 
         }
+     var timer: CountDownTimer? = null
+     fun clearTimer(){
+         if(timer != null)
+           timer?.cancel()
+     }
+
+     fun startTimer(){
+         timer = object: CountDownTimer(20000,1000){
+             override fun onTick(millitime: Long) {
+                 var time = millitime/1000
+
+//                Toast.makeText(this@MainActivity,""+time.toString(),Toast.LENGTH_SHORT).show()
+                 mainViewModel.update_value(time.toString());
+
+             }
+
+             override fun onFinish() {
+
+                 mainViewModel.update_value("finish");
+             }
+         }
+         timer?.start();
+     }
 }
