@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20sp"
+    tools:context=".MainActivity">
+
+  <EditText
+      android:id="@+id/name"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Name"/>
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Enter phone number"/>
+
+    <Button
+        android:id="@+id/insert"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="INSERT"
+        android:onClick="insert_btn"/>
+
+  <Button
+      android:id="@+id/update"
+      android:layout_gravity="center_horizontal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:text="UPDATE"
+      android:onClick="update_btn"/>
+
+    <Button
+        android:id="@+id/updatewithquery"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="UPDATE with query"
+        android:onClick="update_with_query_btn"/>
+
+    <Button
+        android:id="@+id/read"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="READ"
+        android:onClick="read_btn"/>
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="DELETE"
+        android:onClick="delete_btn"/>
+
+  <Button
+      android:id="@+id/deleteall"
+      android:layout_gravity="center_horizontal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:text="DELETE ALL DATA"
+      android:onClick="delete_all_data_btn"/>
+
+</LinearLayout>
