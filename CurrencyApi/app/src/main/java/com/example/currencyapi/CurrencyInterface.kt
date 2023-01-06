@@ -9,11 +9,11 @@ import retrofit2.http.Query
 
 
 val baseUrl = "https://api.apilayer.com/"
-val apikey = "LnAVKSLDYxQ6ak46BWTPLbgcEwduFDoZ"
+
 
 interface CurrencyInterface {
 
-    @Headers("apikey: LnAVKSLDYxQ6ak46BWTPLbgcEwduFDoZ")
+    @Headers("apikey: Apikey")
     @GET("/exchangerates_data/convert?")
      fun getcurrencydata(@Query("to") to:String,@Query("from") from:String,@Query("amount") amount:String):Call<response_data>
 }
