@@ -9,6 +9,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.util.Log
@@ -51,27 +53,38 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
         val contentView = RemoteViews(packageName, R.layout.activity_after_notification)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            val audioAttributes = AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                .build()
+            val notificationSoundUri = Uri.parse("android.resource://" + applicationContext.packageName + "/" + R.raw.rim)
+            // val notificationSoundUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ getApplicationContext().getPackageName() + "/" + R.raw.rim);
+
             notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = Color.GREEN
             notificationChannel.enableVibration(false)
+            notificationChannel.setSound(notificationSoundUri, audioAttributes)
             notificationManager.createNotificationChannel(notificationChannel)
 
             builder = Notification.Builder(this, channelId)
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_background))
-                .setContentTitle("Title" + title)
+                .setContentTitle("Title")
+                .setSound(notificationSoundUri)
                 .setContentText("Desc")
-
                 .setContentIntent(pendingIntent)
+
         } else {
 
+            val notificationSoundUri = Uri.parse("android.resource://" + applicationContext.packageName + "/" + R.raw.rim)
             builder = Notification.Builder(this)
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_background))
                 .setContentTitle("Title" + title)
                 .setContentText("Desc")
-                .setDefaults(Notification.DEFAULT_SOUND)
+                .setSound(notificationSoundUri)
                 .setPriority(Notification.PRIORITY_MAX)
                 .setContentIntent(pendingIntent)
         }
